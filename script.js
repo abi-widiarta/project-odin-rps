@@ -1,72 +1,80 @@
-let compPoint = 0;
+const title = document.querySelector(".title-wrapper__title");
+const playerScore = document.querySelector(".score-wrapper__player span");
+const computerScore = document.querySelector(".score-wrapper__computer span");
+const choices = document.querySelectorAll(".player-choice");
+const scorePlayerChoice = document.querySelector(".score-wrapper__player h1");
+const scoreComputerChoice = document.querySelector(".score-wrapper__computer h1");
+
 let playerPoint = 0;
+let compPoint = 0;
+
+const getPlayerChoice = (e) => {
+  return e;
+};
 
 const getComputerChoice = () => {
   let finalComputerChoice = null;
   const num = Math.ceil(Math.random() * 3);
   switch (num) {
     case 1:
-      finalComputerChoice = "rock";
+      finalComputerChoice = "✊";
       break;
     case 2:
-      finalComputerChoice = "paper";
+      finalComputerChoice = "✋";
       break;
     case 3:
-      finalComputerChoice = "scissor";
+      finalComputerChoice = "✌";
       break;
   }
 
+  scoreComputerChoice.textContent = finalComputerChoice;
   return finalComputerChoice;
 };
 
-const getPlayerChoice = () => {
-  console.log("tes");
-  let playerChoice = prompt("Input Your Choices");
-  if (playerChoice != null) {
-    return playerChoice;
-  } else {
-    setTimeout(getPlayerChoice, 0);
-  }
+const updateScore = () => {
+  playerScore.textContent = playerPoint;
+  computerScore.textContent = compPoint;
 };
 
 const playRound = (compChoice, playerChoice) => {
   let result = null;
-  if ((playerChoice == "rock" && compChoice == "scissor") || (playerChoice == "paper" && compChoice == "rock") || (playerChoice == "scissor" && compChoice == "paper")) {
+  if ((playerChoice == "✊" && compChoice == "✌") || (playerChoice == "✋" && compChoice == "✊") || (playerChoice == "✌" && compChoice == "✋")) {
     playerPoint++;
     result = "Player Win";
-  } else if ((compChoice == "rock" && playerChoice == "scissor") || (compChoice == "paper" && playerChoice == "rock") || (compChoice == "scissor" && playerChoice == "paper")) {
+  } else if ((compChoice == "✊" && playerChoice == "✌") || (compChoice == "✋" && playerChoice == "✊") || (compChoice == "✌" && playerChoice == "✋")) {
     compPoint++;
     result = "Comp Win";
   } else {
     result = "Tie";
   }
-  console.log(`Player Choice : ${playerChoice}`);
-  console.log(`Computer Choice : ${compChoice}`);
-  console.log(`Player Point : ${playerPoint}`);
-  console.log(`Computer Point : ${compPoint}`);
-
+  updateScore(playerPoint, compPoint);
   return result;
 };
 
-const game = () => {
+const game = (element) => {
+  let playerChoice = element.textContent;
   let computerChoice = getComputerChoice();
-  let playerChoice = "rock";
-  console.log(compPoint);
-  console.log(playRound(computerChoice, playerChoice));
-  console.log("");
+  title.textContent = playRound(computerChoice, playerChoice);
   checkWin();
 };
 
 const checkWin = () => {
   if (compPoint == 5) {
-    console.log("Final comp Win");
-    return;
+    title.textContent = "COMPUTER WIN!!!";
+    compPoint = 0;
+    playerPoint = 0;
   } else if (playerPoint == 5) {
-    console.log("Final player Win");
-    return;
+    title.textContent = "PLAYER WIN!!!";
+    compPoint = 0;
+    playerPoint = 0;
   }
-
-  game();
 };
 
-game();
+choices.forEach((element) => {
+  element.addEventListener("click", () => {
+    scorePlayerChoice.textContent = element.textContent;
+    game(element);
+  });
+});
+
+updateScore();

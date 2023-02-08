@@ -4,9 +4,49 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>The Odin Project | Rock Paper Scissor</title>
   </head>
   <body>
+    <!-- Nav Start -->
+    <header>
+      <nav class="navbar">
+        <h1>Rock Paper Scissor</h1>
+      </nav>
+    </header>
+
+    <!-- Main Start -->
+    <main>
+      <!-- Title Wrapper -->
+      <div class="title-wrapper">
+        <h2 class="title-wrapper__title">Choose Your Weapon!</h2>
+        <p class="title-wrapper__subtitle">First To 5 Win</p>
+      </div>
+
+      <!-- Score Start-->
+      <div class="score-wrapper">
+        <!-- Score Player -->
+        <div class="score-wrapper__player">
+          <h1 class="choice">?</h1>
+          <p>YOU : <span></span></p>
+        </div>
+
+        <h1>VS</h1>
+
+        <!-- Score Computer -->
+        <div class="score-wrapper__computer">
+          <h1 class="choice">?</h1>
+          <p>COM : <span></span></p>
+        </div>
+      </div>
+
+      <!-- Choice Start -->
+      <div class="choice-wrapper">
+        <h1 class="choice player-choice">✋</h1>
+        <h1 class="choice player-choice">✌</h1>
+        <h1 class="choice player-choice">✊</h1>
+      </div>
+    </main>
     <script src="./script.js"></script>
   </body>
 </html>
